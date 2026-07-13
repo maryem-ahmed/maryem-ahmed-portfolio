@@ -1,7 +1,8 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Bot, ScanFace, Grid3x3, Code2 } from "lucide-react";
+import { Bot, ScanFace, Grid3x3, Code2, Send, Loader2 } from "lucide-react";
 import { CrochetCard } from "@/components/ui/crochet";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FadeIn } from "@/components/effects/fade-in";
@@ -17,31 +18,7 @@ export function AILab() {
       <div className="grid gap-6 md:grid-cols-2">
         {/* Python Assistant (Flowise + Gemini) */}
         <FadeIn delay={0.1}>
-          <CrochetCard hover className="tatreez-accent relative flex h-full flex-col overflow-hidden p-0">
-            <div className="border-b border-border bg-muted/50 px-4 py-3 flex items-center gap-2">
-              <Bot className="h-4 w-4 text-tatreez-green" />
-              <h3 className="font-medium text-sm">Python Assistant</h3>
-              <span className="ml-auto glass-pill px-2 py-0.5 text-[10px]">Gemini + Flowise</span>
-            </div>
-            
-            <div className="p-4 flex flex-col gap-3 flex-1 bg-background/50">
-              <div className="self-end rounded-2xl rounded-tr-sm bg-muted px-3 py-2 text-xs text-foreground max-w-[80%]">
-                Write a python script to reverse a string
-              </div>
-              <div className="self-start rounded-2xl rounded-tl-sm bg-foreground/5 border border-tatreez-green/20 px-3 py-2 text-xs text-foreground max-w-[90%] shadow-[0_0_10px_rgba(20,153,84,0.1)]">
-                <p className="mb-2">Here is a simple way to reverse a string in Python using slicing:</p>
-                <div className="bg-background rounded p-2 border border-border font-mono text-[10px] text-muted-foreground">
-                  <span className="text-tatreez-red">def</span> <span className="text-tatreez-green">reverse_string</span>(s):<br/>
-                  &nbsp;&nbsp;<span className="text-tatreez-red">return</span> s[::-1]
-                </div>
-              </div>
-              <div className="mt-auto pt-3 flex items-center gap-2">
-                <div className="h-6 flex-1 rounded-full bg-muted border border-border/50 flex items-center px-3">
-                  <span className="text-[10px] text-muted-foreground">Type a message...</span>
-                </div>
-              </div>
-            </div>
-          </CrochetCard>
+          <InteractivePythonAssistant />
         </FadeIn>
 
         <div className="grid gap-6 grid-rows-2">
@@ -127,5 +104,115 @@ export function AILab() {
         </div>
       </div>
     </section>
+  );
+}
+
+function InteractivePythonAssistant() {
+  const [messages, setMessages] = useState<{ role: "user" | "ai"; content: React.ReactNode }[]>([
+    {
+      role: "user",
+      content: "Write a python script to reverse a string",
+    },
+    {
+      role: "ai",
+      content: (
+        <>
+          <p className="mb-2">Here is a simple way to reverse a string in Python using slicing:</p>
+          <div className="bg-background rounded p-2 border border-border font-mono text-[10px] text-muted-foreground">
+            <span className="text-tatreez-red">def</span> <span className="text-tatreez-green">reverse_string</span>(s):<br/>
+            &nbsp;&nbsp;<span className="text-tatreez-red">return</span> s[::-1]
+          </div>
+        </>
+      ),
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, isTyping]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isTyping) return;
+
+    const userMessage = input;
+    setInput("");
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+    setIsTyping(true);
+
+    setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "ai",
+          content: (
+            <>
+              <p className="mb-2">That's an interesting question! For this portfolio demo, I can show you how to print hello world:</p>
+              <div className="bg-background rounded p-2 border border-border font-mono text-[10px] text-muted-foreground">
+                <span className="text-tatreez-green">print</span>(<span className="text-tatreez-red">"Hello, World!"</span>)
+              </div>
+            </>
+          ),
+        },
+      ]);
+      setIsTyping(false);
+    }, 1500);
+  };
+
+  return (
+    <CrochetCard hover className="tatreez-accent relative flex h-[350px] md:h-full flex-col overflow-hidden p-0">
+      <div className="border-b border-border bg-muted/50 px-4 py-3 flex items-center gap-2">
+        <Bot className="h-4 w-4 text-tatreez-green" />
+        <h3 className="font-medium text-sm">Python Assistant</h3>
+        <span className="ml-auto glass-pill px-2 py-0.5 text-[10px]">Gemini + Flowise</span>
+      </div>
+      
+      <div className="p-4 flex flex-col gap-3 flex-1 bg-background/50 overflow-y-auto overflow-x-hidden" ref={scrollRef}>
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            className={
+              msg.role === "user"
+                ? "self-end rounded-2xl rounded-tr-sm bg-muted px-3 py-2 text-xs text-foreground max-w-[80%]"
+                : "self-start rounded-2xl rounded-tl-sm bg-foreground/5 border border-tatreez-green/20 px-3 py-2 text-xs text-foreground max-w-[90%] shadow-[0_0_10px_rgba(20,153,84,0.1)]"
+            }
+          >
+            {msg.content}
+          </div>
+        ))}
+        {isTyping && (
+          <div className="self-start rounded-2xl rounded-tl-sm bg-foreground/5 border border-tatreez-green/20 px-3 py-3 text-xs text-foreground max-w-[90%] shadow-[0_0_10px_rgba(20,153,84,0.1)] flex items-center gap-1">
+            <motion.div className="w-1.5 h-1.5 rounded-full bg-tatreez-green" animate={{ y: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0 }} />
+            <motion.div className="w-1.5 h-1.5 rounded-full bg-tatreez-green" animate={{ y: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }} />
+            <motion.div className="w-1.5 h-1.5 rounded-full bg-tatreez-green" animate={{ y: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }} />
+          </div>
+        )}
+      </div>
+      
+      <form onSubmit={handleSubmit} className="p-3 border-t border-border/50 bg-background/80 backdrop-blur-sm">
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask me anything about Python..."
+            className="flex-1 bg-muted border border-border/50 rounded-full px-4 py-1.5 text-xs focus:outline-none focus:border-tatreez-green/50"
+            disabled={isTyping}
+          />
+          <button
+            type="submit"
+            disabled={!input.trim() || isTyping}
+            className="bg-foreground text-background p-1.5 rounded-full disabled:opacity-50 transition-transform active:scale-95"
+          >
+            {isTyping ? <Loader2 className="h-3 w-3 animate-spin" /> : <Send className="h-3 w-3" />}
+          </button>
+        </div>
+      </form>
+    </CrochetCard>
   );
 }
