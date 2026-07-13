@@ -65,7 +65,7 @@ export function CrochetLab() {
     <section id="crochet-lab" className="scroll-mt-8 py-2">
       <SectionHeading id="crochet-lab-heading" title="Interactive Crochet Lab" />
       <p className="mb-8 text-sm text-muted-foreground">
-        Design your own Palestinian Tatreez or Crochet pattern pixel by pixel.
+        Design your own custom Crochet pattern pixel by pixel.
       </p>
 
       <FadeIn>
