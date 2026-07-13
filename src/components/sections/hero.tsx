@@ -44,7 +44,7 @@ export function Hero() {
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
-            <a href="#projects" className="glass-subtle inline-flex items-center gap-2 bg-foreground px-4 py-2 text-sm text-background">
+            <a href="#projects" className="inline-flex items-center gap-2 bg-foreground px-4 py-2 text-sm text-background rounded-full transition-colors hover:bg-foreground/90 hover:scale-105">
               View work
               <ArrowDown className="h-3.5 w-3.5" />
             </a>
