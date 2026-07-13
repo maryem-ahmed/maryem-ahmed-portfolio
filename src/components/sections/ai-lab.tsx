@@ -141,23 +141,44 @@ function InteractivePythonAssistant() {
     if (!input.trim() || isTyping) return;
 
     const userMessage = input;
+    const lowerInput = userMessage.toLowerCase();
     setInput("");
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     setIsTyping(true);
 
     setTimeout(() => {
+      let aiResponse: React.ReactNode;
+
+      if (lowerInput.includes("maryem") || lowerInput.includes("who is")) {
+        aiResponse = (
+          <p className="mb-2 leading-relaxed">
+            <strong className="text-tatreez-green">Maryem Ahmed</strong> is an AI Engineer from Cairo, Egypt. She specializes in <span className="text-tatreez-red">Generative AI</span>, LLMs, and Computer Vision. She built me!
+          </p>
+        );
+      } else if (lowerInput.includes("contact") || lowerInput.includes("hire") || lowerInput.includes("email")) {
+        aiResponse = (
+          <p className="mb-2">
+            You can reach her at <a href="mailto:maryemahmed707@gmail.com" className="text-tatreez-green underline">maryemahmed707@gmail.com</a>. She's always open to exciting AI opportunities!
+          </p>
+        );
+      } else if (lowerInput.includes("hello") || lowerInput.includes("hi")) {
+        aiResponse = <p className="mb-2">Hello! I'm Maryem's AI Assistant clone. Ask me about her skills, or try asking a Python question!</p>;
+      } else {
+        aiResponse = (
+          <>
+            <p className="mb-2">That's an interesting question! For this portfolio demo, I can show you how to print hello world in Python:</p>
+            <div className="bg-background rounded p-2 border border-border font-mono text-[10px] text-muted-foreground">
+              <span className="text-tatreez-green">print</span>(<span className="text-tatreez-red">"Hello, World!"</span>)
+            </div>
+          </>
+        );
+      }
+
       setMessages((prev) => [
         ...prev,
         {
           role: "ai",
-          content: (
-            <>
-              <p className="mb-2">That's an interesting question! For this portfolio demo, I can show you how to print hello world:</p>
-              <div className="bg-background rounded p-2 border border-border font-mono text-[10px] text-muted-foreground">
-                <span className="text-tatreez-green">print</span>(<span className="text-tatreez-red">"Hello, World!"</span>)
-              </div>
-            </>
-          ),
+          content: aiResponse,
         },
       ]);
       setIsTyping(false);
