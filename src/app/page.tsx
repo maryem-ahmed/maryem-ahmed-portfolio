@@ -2,6 +2,7 @@ import { BackToTop } from "@/components/layout/back-to-top";
 import { KeffiyehDivider } from "@/components/ui/crochet";
 import { Hero } from "@/components/sections/hero";
 import { Skills } from "@/components/sections/skills";
+import { AILab } from "@/components/sections/ai-lab";
 import { Projects } from "@/components/sections/projects";
 import { Experience } from "@/components/sections/experience";
 import { Education } from "@/components/sections/education";
@@ -13,6 +14,9 @@ export default function Home() {
   return (
     <main className="relative z-10 mx-auto min-h-screen w-full max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
       <Hero />
+
+      <KeffiyehDivider />
+      <AILab />
 
       <KeffiyehDivider />
       <Skills />

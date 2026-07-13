@@ -35,6 +35,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThreadCursor } from "@/components/effects/thread-cursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -44,6 +46,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <ThreadCursor />
           {children}
         </ThemeProvider>
       </body>

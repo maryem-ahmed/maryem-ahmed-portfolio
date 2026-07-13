@@ -38,6 +38,8 @@
   --accent: var(--kufiya-black);
   --tatreez-red: var(--kufiya-red);
   --tatreez-green: var(--kufiya-green);
+  --tatreez-glow-red: 0 0 10px rgba(228, 49, 43, 0.6), 0 0 20px rgba(228, 49, 43, 0.4);
+  --tatreez-glow-green: 0 0 10px rgba(20, 153, 84, 0.6), 0 0 20px rgba(20, 153, 84, 0.4);
 }
 
 @theme inline {
@@ -129,6 +131,7 @@ body::before {
 
 .tatreez-accent {
   position: relative;
+  overflow: hidden;
 }
 .tatreez-accent::after {
   content: 'x x x x';
@@ -139,7 +142,15 @@ body::before {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 2px;
-  opacity: 0.8;
+  opacity: 0;
+  text-shadow: var(--tatreez-glow-red, none);
+  transition: all 0.5s ease;
+  transform: translateY(-5px);
+}
+.tatreez-accent:hover::after {
+  opacity: 0.9;
+  transform: translateY(0);
+  top: 10px;
 }
 
 .crochet-corner {
