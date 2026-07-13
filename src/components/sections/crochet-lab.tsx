@@ -24,7 +24,7 @@ export function CrochetLab() {
   const [history, setHistory] = useState<string[][][]>([generateEmptyGrid(16)]);
   const [historyIndex, setHistoryIndex] = useState(0);
 
-  const [activeColor, setActiveColor] = useState<string>("var(--kufiya-red)");
+  const [activeColor, setActiveColor] = useState<string>("#e4312b");
   const [customColor, setCustomColor] = useState<string>("#3b82f6");
   const [isDrawing, setIsDrawing] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -82,9 +82,9 @@ export function CrochetLab() {
       for (let c = 0; c < halfSize; c++) {
         if (Math.random() > 0.6) {
           const colorRand = Math.random();
-          let color = "var(--kufiya-red)";
-          if (colorRand > 0.8) color = "var(--kufiya-black)";
-          else if (colorRand > 0.7) color = "var(--kufiya-green)";
+          let color = "#e4312b"; // Red
+          if (colorRand > 0.8) color = "#111111"; // Black
+          else if (colorRand > 0.7) color = "#375335"; // Green
 
           newGrid[r][c] = color;
           newGrid[r][gridSize - 1 - c] = color;
@@ -102,7 +102,7 @@ export function CrochetLab() {
     setIsDownloading(true);
     try {
       const canvas = await html2canvas(gridRef.current, {
-        backgroundColor: "var(--background)",
+        backgroundColor: "#ffffff",
         scale: 2,
       });
       const url = canvas.toDataURL("image/png");
@@ -168,18 +168,21 @@ export function CrochetLab() {
                 <h3 className="mb-3 text-sm font-semibold">1. Choose Yarn</h3>
                 <div className="flex flex-wrap items-center gap-3">
                   <button 
-                    onClick={() => setActiveColor("var(--kufiya-red)")}
-                    className={cn("w-8 h-8 rounded-full bg-tatreez-red shadow-sm transition-transform", activeColor === "var(--kufiya-red)" ? "scale-125 ring-2 ring-foreground ring-offset-2 ring-offset-background" : "hover:scale-110")}
+                    onClick={() => setActiveColor("#e4312b")}
+                    className={cn("w-8 h-8 rounded-full shadow-sm transition-transform", activeColor === "#e4312b" ? "scale-125 ring-2 ring-foreground ring-offset-2 ring-offset-background" : "hover:scale-110")}
+                    style={{ backgroundColor: "#e4312b" }}
                     title="Tatreez Red"
                   />
                   <button 
-                    onClick={() => setActiveColor("var(--kufiya-green)")}
-                    className={cn("w-8 h-8 rounded-full bg-tatreez-green shadow-sm transition-transform", activeColor === "var(--kufiya-green)" ? "scale-125 ring-2 ring-foreground ring-offset-2 ring-offset-background" : "hover:scale-110")}
+                    onClick={() => setActiveColor("#375335")}
+                    className={cn("w-8 h-8 rounded-full shadow-sm transition-transform", activeColor === "#375335" ? "scale-125 ring-2 ring-foreground ring-offset-2 ring-offset-background" : "hover:scale-110")}
+                    style={{ backgroundColor: "#375335" }}
                     title="Olive Green"
                   />
                   <button 
-                    onClick={() => setActiveColor("var(--kufiya-black)")}
-                    className={cn("w-8 h-8 rounded-full bg-foreground shadow-sm transition-transform", activeColor === "var(--kufiya-black)" ? "scale-125 ring-2 ring-foreground ring-offset-2 ring-offset-background" : "hover:scale-110")}
+                    onClick={() => setActiveColor("#111111")}
+                    className={cn("w-8 h-8 rounded-full shadow-sm transition-transform", activeColor === "#111111" ? "scale-125 ring-2 ring-foreground ring-offset-2 ring-offset-background" : "hover:scale-110")}
+                    style={{ backgroundColor: "#111111" }}
                     title="Keffiyeh Black"
                   />
                   <label 
