@@ -6,7 +6,7 @@ import { AILab } from "@/components/sections/ai-lab";
 import { Projects } from "@/components/sections/projects";
 import { Timeline } from "@/components/sections/timeline";
 import { Certifications } from "@/components/sections/certifications";
-import { TatreezGenerator } from "@/components/sections/tatreez-generator";
+import { CrochetLab } from "@/components/sections/crochet-lab";
 import { Contact } from "@/components/sections/contact";
 import { personal } from "@/data/portfolio";
 
@@ -31,7 +31,7 @@ export default function Home() {
       <Certifications />
 
       <KeffiyehDivider />
-      <TatreezGenerator />
+      <CrochetLab />
 
       <KeffiyehDivider />
       <Contact />
