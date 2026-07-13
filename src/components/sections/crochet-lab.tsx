@@ -2,7 +2,8 @@
 
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Wand2, Eraser, Scissors, Mail, Instagram } from "lucide-react";
+import { Wand2, Eraser, Scissors, Mail } from "lucide-react";
+import { InstagramIcon } from "@/components/ui/brand-icons";
 import { CrochetCard } from "@/components/ui/crochet";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FadeIn } from "@/components/effects/fade-in";
@@ -130,7 +131,7 @@ export function CrochetLab() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 px-4 py-2 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
                 >
-                  <Instagram className="h-4 w-4" />
+                  <InstagramIcon className="h-4 w-4" />
                   Visit @twistedd_store
                 </a>
                 <a 
