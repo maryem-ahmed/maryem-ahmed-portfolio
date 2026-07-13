@@ -296,3 +296,37 @@ body::before {
 .focus-card {
   border-left: 3px solid var(--foreground);
 }
+
+/* Embroidered Patch Styles */
+.tatreez-patch {
+  position: relative;
+  border: 2px dashed var(--kufiya-red);
+  background: color-mix(in srgb, var(--kufiya-red) 5%, transparent);
+  color: var(--foreground);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 4px;
+}
+.tatreez-patch::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background-image: radial-gradient(circle at 1px 1px, var(--foreground) 1px, transparent 0);
+  background-size: 4px 4px;
+  pointer-events: none;
+}
+.tatreez-patch-active {
+  background: var(--kufiya-red);
+  color: var(--kufiya-white) !important;
+  border-style: solid;
+  box-shadow: 0 0 10px rgba(228, 49, 43, 0.4);
+  transform: scale(1.05);
+}
+.tatreez-patch:hover:not(.tatreez-patch-active) {
+  background: color-mix(in srgb, var(--kufiya-red) 15%, transparent);
+  transform: translateY(-2px) rotate(1deg);
+}

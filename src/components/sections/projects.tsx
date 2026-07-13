@@ -26,8 +26,8 @@ export function Projects() {
         <button
           onClick={() => setFilter(null)}
           className={cn(
-            "rounded-sm px-3.5 py-1.5 text-xs font-medium transition-all",
-            !filter ? "glass-pill-active glass-pill" : "glass-pill text-muted-foreground hover:text-foreground"
+            "tatreez-patch",
+            !filter ? "tatreez-patch-active" : "text-muted-foreground"
           )}
         >
           All
@@ -37,8 +37,8 @@ export function Projects() {
             key={tech}
             onClick={() => setFilter(filter === tech ? null : tech)}
             className={cn(
-              "rounded-sm px-3.5 py-1.5 text-xs font-medium transition-all",
-              filter === tech ? "glass-pill-active glass-pill" : "glass-pill text-muted-foreground hover:text-foreground"
+              "tatreez-patch",
+              filter === tech ? "tatreez-patch-active" : "text-muted-foreground"
             )}
           >
             {tech}

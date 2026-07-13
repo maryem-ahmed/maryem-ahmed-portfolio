@@ -1,13 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowDown, Mail, MapPin } from "lucide-react";
+import { ArrowDown, Mail, MapPin, Terminal } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/brand-icons";
 import { CrochetHoop } from "@/components/ui/crochet";
+import { TerminalMode } from "@/components/ui/terminal-mode";
 import { personal, focusThreads } from "@/data/portfolio";
 
 export function Hero() {
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+
   return (
     <motion.section
       id="about"
@@ -63,6 +67,11 @@ export function Hero() {
                 <Mail className="h-3.5 w-3.5" /> Email
               </span>
             </a>
+            <button onClick={() => setIsTerminalOpen(true)} className="glass-subtle px-3.5 py-2 text-sm text-green-600 dark:text-green-400 hover:bg-green-500/10">
+              <span className="inline-flex items-center gap-1.5">
+                <Terminal className="h-3.5 w-3.5" /> Geek Mode
+              </span>
+            </button>
           </div>
 
           <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -88,6 +97,8 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      <TerminalMode isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
     </motion.section>
   );
 }

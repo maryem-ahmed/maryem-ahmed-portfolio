@@ -4,9 +4,9 @@ import { Hero } from "@/components/sections/hero";
 import { Skills } from "@/components/sections/skills";
 import { AILab } from "@/components/sections/ai-lab";
 import { Projects } from "@/components/sections/projects";
-import { Experience } from "@/components/sections/experience";
-import { Education } from "@/components/sections/education";
+import { Timeline } from "@/components/sections/timeline";
 import { Certifications } from "@/components/sections/certifications";
+import { TatreezGenerator } from "@/components/sections/tatreez-generator";
 import { Contact } from "@/components/sections/contact";
 import { personal } from "@/data/portfolio";
 
@@ -25,13 +25,13 @@ export default function Home() {
       <Projects />
 
       <KeffiyehDivider />
-      <Experience />
+      <Timeline />
 
       <KeffiyehDivider />
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-8">
-        <Education />
-        <Certifications />
-      </div>
+      <Certifications />
+
+      <KeffiyehDivider />
+      <TatreezGenerator />
 
       <KeffiyehDivider />
       <Contact />
