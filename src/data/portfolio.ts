@@ -10,7 +10,6 @@ export const personal = {
   github: "https://github.com/maryem-ahmed",
   avatar: "https://avatars.githubusercontent.com/u/125514435?v=4",
   availability: "Open to AI/ML opportunities",
-  currentFocus: "MeetGenie — AI Meeting Assistant (Graduation Project)",
 };
 
 export const focusThreads = [

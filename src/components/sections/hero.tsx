@@ -90,10 +90,6 @@ export function Hero() {
                 </span>
               ))}
             </div>
-            <p className="focus-card rounded-lg border border-border bg-card px-4 py-3 text-left text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">Current · </span>
-              {personal.currentFocus}
-            </p>
           </div>
         </div>
       </div>
