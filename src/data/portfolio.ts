@@ -6,7 +6,7 @@ export const personal = {
   location: "Cairo, Egypt",
   email: "maryemahmed707@gmail.com",
   phone: "+20 102 340 6557",
-  linkedin: "https://www.linkedin.com/in/maryem-ahmed",
+  linkedin: "https://www.linkedin.com/in/maryem-ahmed-/",
   github: "https://github.com/maryem-ahmed",
   avatar: "https://avatars.githubusercontent.com/u/125514435?v=4",
   availability: "Open to AI/ML opportunities",
