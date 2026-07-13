@@ -44,10 +44,10 @@ export function Timeline() {
                 <div className="mb-4 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-semibold text-lg text-foreground">
-                      {item.isEdu ? item.degree : item.role}
+                      {item.isEdu ? (item as any).degree : (item as any).role}
                     </h3>
                     <p className="text-muted-foreground mt-1">
-                      {item.isEdu ? item.institution : item.company}
+                      {item.isEdu ? (item as any).institution : (item as any).company}
                     </p>
                   </div>
                   <div className="text-left sm:text-right">
