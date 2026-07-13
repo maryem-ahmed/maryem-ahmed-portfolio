@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+:root {
+  --kufiya-white: #f8f8f6;
+  --kufiya-black: #0a0a0a;
+  --kufiya-gray: #666666;
+  --kufiya-muted: #efefec;
+  --kufiya-red: #E4312b;
+  --kufiya-green: #149954;
+  --pattern: rgba(10, 10, 10, 0.045);
+
+  --background: var(--kufiya-white);
+  --foreground: var(--kufiya-black);
+  --card: #ffffff;
+  --muted: var(--kufiya-muted);
+  --muted-foreground: var(--kufiya-gray);
+  --border: rgba(10, 10, 10, 0.14);
+  --accent: var(--kufiya-black);
+  --tatreez-red: var(--kufiya-red);
+  --tatreez-green: var(--kufiya-green);
+}
+
+.dark {
+  --kufiya-white: #111111;
+  --kufiya-black: #f5f5f3;
+  --kufiya-gray: #a3a3a3;
+  --kufiya-muted: #1a1a1a;
+  --kufiya-red: #E4312b;
+  --kufiya-green: #149954;
+  --pattern: rgba(245, 245, 243, 0.04);
+
+  --background: #0a0a0a;
+  --foreground: var(--kufiya-black);
+  --card: #141414;
+  --muted: var(--kufiya-muted);
+  --muted-foreground: var(--kufiya-gray);
+  --border: rgba(245, 245, 243, 0.12);
+  --accent: var(--kufiya-black);
+  --tatreez-red: var(--kufiya-red);
+  --tatreez-green: var(--kufiya-green);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-tatreez-red: var(--tatreez-red);
+  --color-tatreez-green: var(--tatreez-green);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Keffiyeh fishnet — subtle */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M0 12 L12 0 L24 12 L12 24 Z' fill='none' stroke='%230a0a0a' stroke-width='0.5' opacity='0.25'/%3E%3C/svg%3E");
+  background-size: 18px 18px;
+}
+
+::selection {
+  background: rgba(10, 10, 10, 0.12);
+  color: var(--foreground);
+}
+
+.glass,
+.crochet-card,
+.tatreez-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.crochet-card-hover,
+.tatreez-card-hover {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crochet-card-hover:hover,
+.tatreez-card-hover:hover {
+  border-color: var(--foreground);
+  box-shadow: 0 4px 20px rgba(10, 10, 10, 0.06);
+}
+
+.swatch-solid { border-top: 3px solid var(--tatreez-red); }
+.swatch-stripe {
+  border-top: 3px solid transparent;
+  border-image: repeating-linear-gradient(
+    90deg,
+    var(--tatreez-green) 0px,
+    var(--tatreez-green) 6px,
+    transparent 6px,
+    transparent 10px
+  ) 3;
+}
+.swatch-mesh {
+  border-top: 3px solid var(--foreground);
+  opacity: 1;
+}
+
+.tatreez-accent {
+  position: relative;
+}
+.tatreez-accent::after {
+  content: 'x x x x';
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  color: var(--tatreez-red);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+.crochet-corner {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid var(--foreground);
+  opacity: 0.2;
+}
+
+.crochet-corner-tl { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+.crochet-corner-br { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+
+.glass-subtle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.glass-subtle:hover {
+  border-color: var(--foreground);
+  background: var(--muted);
+}
+
+.glass-pill {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+  border-radius: 9999px;
+}
+
+.glass-pill-active {
+  background: var(--foreground);
+  border-color: var(--foreground);
+  color: var(--background);
+}
+
+.glass-input {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  transition: border-color 0.2s;
+}
+
+.glass-input:focus {
+  border-color: var(--foreground);
+  outline: none;
+}
+
+.hoop-outer {
+  background: var(--tatreez-red);
+  box-shadow: 0 0 0 3px var(--background), 0 0 0 5px var(--tatreez-green);
+}
+
+.hoop-inner {
+  background: var(--background);
+  border: 1px dashed var(--foreground);
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  position: relative;
+  padding-bottom: 0.65rem;
+}
+
+.section-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 3rem;
+  height: 2px;
+  background: var(--foreground);
+}
+
+@media (min-width: 640px) {
+  .section-heading {
+    font-size: 1.75rem;
+  }
+}
+
+.keffiyeh-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+}
+
+.profile-image {
+  transition: transform 0.4s ease;
+  filter: grayscale(15%);
+}
+
+.crochet-hoop:hover .profile-image {
+  transform: scale(1.03);
+  filter: grayscale(0%);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+}
+
+.status-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tatreez-green);
+}
+
+.focus-tag {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.focus-tag:hover {
+  border-color: var(--foreground);
+  background: var(--muted);
+}
+
+.focus-card {
+  border-left: 3px solid var(--foreground);
+}
