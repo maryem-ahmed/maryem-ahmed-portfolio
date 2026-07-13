@@ -56,7 +56,6 @@ export function TerminalMode({ isOpen, onClose }: TerminalModeProps) {
           <div className="flex flex-col gap-1">
             <span>Name: {personal.name}</span>
             <span>Title: {personal.title}</span>
-            <span>Focus: {personal.currentFocus}</span>
             <span className="mt-2 text-gray-400">"{personal.tagline}"</span>
           </div>
         );
